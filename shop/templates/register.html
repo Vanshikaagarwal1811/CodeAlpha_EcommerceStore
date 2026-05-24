@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>Create Account</h1>
+        {% if messages %}
+
+    {% for message in messages %}
+
+        <p>{{ message }}</p>
+
+    {% endfor %}
+
+{% endif %}
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input type="text" name="first_name" placeholder="First Name" required>
+
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email">
+
+            <input type="password" name="password" placeholder="Password">
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="/login/">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

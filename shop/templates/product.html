@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">🏠</a>
+
+<a href="/cart/">🛒</a>
+    </div>
+<div class="product-container">
+
+    <div class="product-image">
+
+        <img src="{{ product.image }}">
+    </div>
+
+    <div class="product-details">
+
+        <h1>{{ product.name }}</h1>
+
+        <h2>₹{{ product.price }}</h2>
+
+        <p>{{ product.description }}</p>
+
+<div class="colors">
+    <h2>Select Color</h2>
+
+<div class="color-options">
+    <span class="color-circle black" onclick="changeColor('Black')"></span>
+    <span class="color-circle red" onclick="changeColor('Red')"></span>
+    <span class="color-circle blue" onclick="changeColor('Blue')"></span>
+</div>
+
+<p id="selected-color">Selected Color: Black</p>
+</div>
+    <a id="cart-link" href="/add-to-cart/{{ product.id }}/?color=Black">
+    <button>Add To Cart</button>
+</a>
+    </div>
+
+</div>    
+
+<script>
+
+let selectedColor = "Black";
+
+function changeColor(color){
+
+    selectedColor = color;
+
+    document.getElementById("selected-color").innerText =
+    "Selected Color: " + color;
+
+    document.getElementById("cart-link").href =
+    "/add-to-cart/{{ product.id }}/?color=" + color;
+}
+
+</script>
+</body>
+</html>

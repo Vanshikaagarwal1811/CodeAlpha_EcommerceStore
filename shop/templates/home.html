@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Store</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <h1>My Store</h1>
+
+        <div class="nav-right">
+
+            <form method="GET">
+
+                <input type="text"
+                       name="search"
+                       placeholder="Search products">
+
+            </form>
+        <a href="/cart/">🛒</a>
+        </div>
+        <div class="navbar">
+
+
+{% if user.is_authenticated %}
+<div class="user-links">
+
+    <span>Hi, {{ user.first_name }} {{ user.last_name }}</span>
+
+    <a href="/logout/">Logout</a>
+
+</div>
+
+{% else %}
+
+<div class="auth-links">
+    <a href="/login/">Login</a>
+    <a href="/register/">Register</a>
+</div>
+
+{% endif %}
+
+</div>
+
+    </div>
+
+</div>
+    </div>
+<div class="tagline">
+    <h2>Premium Watches • Luxury Collection • Fast Delivery • Best Deals ✨</h2>
+</div>
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="card">
+
+            <img src="{{ product.image }}">
+            <h1>{{ product.name }}</h1>
+
+            <p>{{ product.description }}</p>
+
+            <h2>₹{{ product.price }}</h2>
+
+            <a href="/product/{{ product.id }}/">
+
+                <button>View Product</button>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <footer>
+
+        <h3>My Store © 2026</h3>
+
+    </footer>
+
+</body>
+</html>
